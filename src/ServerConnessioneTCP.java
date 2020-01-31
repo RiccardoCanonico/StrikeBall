@@ -26,12 +26,13 @@ public class ServerConnessioneTCP {
         ServerSocket sSocket = null;
         //oggetto da usare per realizzare la connessione TCP
         Socket connection;
-        Countdown c=new Countdown();
+        int timer=10000;
+        Countdown c=new Countdown(timer);
             try{
                 // il server si mette in ascolto sulla porta voluta
                 sSocket = new ServerSocket(port);
                 System.out.println("In attesa di connessioni!");
-                sSocket.setSoTimeout(10000);
+                sSocket.setSoTimeout(timer);
                 c.start();
                 connection = sSocket.accept();
                 c.connected=true;
