@@ -24,7 +24,7 @@ public class ServerConnessioneTCP {
      */
     public static void main(String[] args) {
         // porta del server maggiore di 1024 
-        int port=2000;
+        int port=2501;
         //oggetto ServerSocket necessario per accettare richieste dal client
         ServerSocket sSocket = null;
         //oggetto da usare per realizzare la connessione TCP
@@ -59,6 +59,7 @@ public class ServerConnessioneTCP {
         }
         catch(IOException e){
             System.err.println("Errore di I/O!");
+            
         }
 
         //chiusura della connessione con il client
