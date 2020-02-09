@@ -22,7 +22,6 @@ public class ServerConnessioneTCP {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
         // porta del server maggiore di 1024 
         int port=2501;
         //oggetto ServerSocket necessario per accettare richieste dal client
@@ -33,43 +32,54 @@ public class ServerConnessioneTCP {
         Countdown c=new Countdown(timer);
         BufferedReader in;
         DataOutputStream out;
-        try{
-            // il server si mette in ascolto sulla porta voluta
-            sSocket = new ServerSocket(port);
-            System.out.println("In attesa di connessioni!");
-            sSocket.setSoTimeout(timer);
-            c.start();
-            connection = sSocket.accept();
-            c.connected=true;
-            System.out.println("Connessione stabilita!");
-            System.out.println("Socket server: " + connection.getLocalSocketAddress());
-            System.out.println("Socket client: " + connection.getRemoteSocketAddress());
-            c.interrupt();
-            
-            in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            out = new DataOutputStream(connection.getOutputStream());
-            
-            String str = in.readLine();
-            System.out.println(str);
-            
-            String strRisp = "ciao";
-            out.writeBytes(strRisp);
-            
-            out.close();
+        String risposta = "bom bom";
+        String richiesta = null;
+        
+        public void connect() {
+	        try{
+	            // il server si mette in ascolto sulla porta voluta
+	            sSocket = new ServerSocket(port);
+	            System.out.println("In attesa di connessioni!");
+	            sSocket.setSoTimeout(timer);
+	            c.start();
+	            connection = sSocket.accept();
+	            c.connected=true;
+	            System.out.println("Connessione stabilita!");
+	            System.out.println("Socket server: " + connection.getLocalSocketAddress());
+	            System.out.println("Socket client: " + connection.getRemoteSocketAddress());
+	            c.interrupt();
+	            
+	            in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+	            out = new DataOutputStream(connection.getOutputStream());
+	            
+	        }
+	        catch(IOException e){
+	            System.err.println("Errore di I/O!");
+	            
+	        }
         }
-        catch(IOException e){
-            System.err.println("Errore di I/O!");
-            
+        public void talk() {
+			try {
+				richiesta = in.readLine();
+	            System.out.println(richiesta);
+	            out.writeBytes(risposta);
+	              
+	            out.close();
+			} 
+			catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         }
-
-        //chiusura della connessione con il client
-        try {
-            if (sSocket!=null) 
-                sSocket.close();
-        } 
-        catch (IOException ex) {
-            System.err.println("Errore nella chiusura della connessione!");
-        }
-        System.out.println("Connessione chiusa!");
-      }
+	
+	       /* //chiusura della connessione con il client
+	        try {
+	            if (sSocket!=null) 
+	                sSocket.close();
+	        } 
+	        catch (IOException ex) {
+	            System.err.println("Errore nella chiusura della connessione!");
+	        }
+	        System.out.println("Connessione chiusa!");
+        }*/
 }
