@@ -31,6 +31,10 @@ public class ClientConnessioneTCP {
     DataOutputStream out;
     BufferedReader in;
     
+    public ClientConnessioneTCP(int port){
+    	this.port = port;   	
+    }
+    
     //apertura della connessione al server sulla porta specificata
     public void connect() {
 		try{
@@ -56,9 +60,9 @@ public class ClientConnessioneTCP {
 			servermess = in.readLine();
 	        System.out.println("Risposta dal server: "+servermess);
 		} 
-    	catch (IOException e1) {
+    	catch (IOException e) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			e.printStackTrace();
 		}
     	finally {
 		    try {

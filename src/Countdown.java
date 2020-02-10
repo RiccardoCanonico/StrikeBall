@@ -10,7 +10,7 @@ public class Countdown extends Thread{
     boolean b=false;
     boolean b2;
     public boolean connected;
-    public int timer=10000;
+    public int timer;
     
     public Countdown(int timer) {
     	this.timer=timer;
@@ -20,13 +20,13 @@ public class Countdown extends Thread{
     public void run(){
         while(timer > 0 && !connected){
             try {
-                sleep(1000);
+            	sleep(1000);
                 b2 = this.isInterrupted();
                 System.out.println("CountDown: "+timer/1000+ " secondi");
-                timer-=1000;                   
+                timer-=1000;
             }
             catch (InterruptedException ex) {
-                System.out.println("ERRORE");
+    			ex.printStackTrace();
             }
         }
     }
