@@ -11,11 +11,6 @@ public class ClientMain {
 	public static void main(String[] args) {
 		ClientConnessioneTCP client1 = new ClientConnessioneTCP(2502);
 		client1.connect();
-		client1.talk();
-		
-		/*ClientConnessioneTCP client2 = new ClientConnessioneTCP(2503);
-		client2.connect();
-		client2.talk();*/
-		
+		client1.talk();		
 	}
 }

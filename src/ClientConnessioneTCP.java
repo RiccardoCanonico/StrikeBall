@@ -36,7 +36,7 @@ public class ClientConnessioneTCP {
     }
     
     //apertura della connessione al server sulla porta specificata
-    public void connect() {
+    public Socket connect() {
 		try{
 		    connection = new Socket(serverAddress, port);
 		    System.out.println("Connessione aperta");
@@ -53,28 +53,30 @@ public class ClientConnessioneTCP {
 		    System.err.println(e2);
 		    e2.printStackTrace();
 		}
+		return connection;
     }
     public void talk() {
-    	try {
-			out.writeBytes(mess + "\n");
-			servermess = in.readLine();
-	        System.out.println("Risposta dal server: "+servermess);
-		} 
-    	catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	    	try {
+				out.writeBytes(mess + "\n");
+				servermess = in.readLine();
+		        System.out.println("Risposta dal server: "+servermess);
+			} 
+	    	catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    	finally {
+			    try {
+				      if (connection!=null)
+				        {
+				            connection.close();
+				            System.out.println("Connessione chiusa!");
+				        }
+					}
+			    catch(IOException e){
+			        System.err.println("Errore nella chiusura della connessione!");
+			    }
+	    	}    		
 		}
-    	finally {
-		    try {
-			      if (connection!=null)
-			        {
-			            connection.close();
-			            System.out.println("Connessione chiusa!");
-			        }
-				}
-		    catch(IOException e){
-		        System.err.println("Errore nella chiusura della connessione!");
-		    }
-    	}
-	}
+    	
 }

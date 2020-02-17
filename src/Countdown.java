@@ -1,4 +1,3 @@
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,13 +19,13 @@ public class Countdown extends Thread{
     public void run(){
         while(timer > 0 && !connected){
             try {
-            	sleep(1000);
-                b2 = this.isInterrupted();
+            	sleep(1000);           	
+                b2 = this.isInterrupted();                
                 System.out.println("CountDown: "+timer/1000+ " secondi");
                 timer-=1000;
             }
             catch (InterruptedException ex) {
-    			ex.printStackTrace();
+    			//ex.printStackTrace();
             }
         }
     }
