@@ -8,11 +8,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ServerThread extends Thread{    
-     ServerSocket sSocket = null;     
-     Socket connection;
+	//oggetto da usare per realizzare la connessione TCP 
+	 Socket connection;
      BufferedReader in;
      DataOutputStream out;
-     String risposta = "bom bom";
+     String risposta = "ciao anche a te";
      String richiesta = null;
      boolean connected = true;
      
@@ -29,8 +29,10 @@ public class ServerThread extends Thread{
     	 }
      }
      
+     // metodo per la comunicazione con client
      public void talk() {
     	try {
+    		// definizione stream per la comunicazione
 			in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			out = new DataOutputStream(connection.getOutputStream());
 		} 
@@ -39,8 +41,11 @@ public class ServerThread extends Thread{
 			e1.printStackTrace();
 		}
 		try {
+			// lettura richiesta server
 			richiesta = in.readLine();
             System.out.println("Richiesta client: "+richiesta);
+            
+            // invio risposta al client
             out.writeBytes(risposta);
               
             out.close();

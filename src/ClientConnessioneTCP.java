@@ -20,7 +20,7 @@ public class ClientConnessioneTCP {
     /**
      * @param args the command line arguments
      */
-    static String mess = "mr.sandman";
+    static String mess = "ciao";
     static String servermess;
     //oggetto da usare per realizzare la connessione TCP
     Socket connection = null;
@@ -40,8 +40,6 @@ public class ClientConnessioneTCP {
 		try{
 		    connection = new Socket(serverAddress, port);
 		    System.out.println("Connessione aperta");
-		    out = new DataOutputStream(connection.getOutputStream());
-		    in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 		}
 		catch(ConnectException e){
 		    System.err.println("Server non disponibile!");
@@ -55,9 +53,17 @@ public class ClientConnessioneTCP {
 		}
 		return connection;
     }
+    //Metodo per la comunicazione con server
     public void talk() {
 	    	try {
+	    		 //Definizione stream per la comunicazione
+	    		out = new DataOutputStream(connection.getOutputStream());
+			    in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			    
+	    		//Invio messaggio
 				out.writeBytes(mess + "\n");
+				
+				//Ricezione risposta server
 				servermess = in.readLine();
 		        System.out.println("Risposta dal server: "+servermess);
 			} 
