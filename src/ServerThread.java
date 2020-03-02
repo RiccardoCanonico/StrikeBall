@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,7 +11,7 @@ import java.util.logging.Logger;
 public class ServerThread extends Thread{    
 	//oggetto da usare per realizzare la connessione TCP 
 	 Socket connection;
-     BufferedReader in;
+     DataInputStream in;
      DataOutputStream out;
      String risposta = "ciao anche a te";
      String richiesta = null;
@@ -33,7 +34,7 @@ public class ServerThread extends Thread{
      public void talk() {
     	try {
     		// definizione stream per la comunicazione
-			in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			in = new DataInputStream(connection.getInputStream());
 			out = new DataOutputStream(connection.getOutputStream());
 		} 
     	catch (IOException e1) {
@@ -42,7 +43,7 @@ public class ServerThread extends Thread{
 		}
 		try {
 			// lettura richiesta server
-			richiesta = in.readLine();
+			richiesta = in.readUTF();
             System.out.println("Richiesta client: "+richiesta);
             
             // invio risposta al client

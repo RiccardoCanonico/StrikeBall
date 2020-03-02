@@ -5,6 +5,7 @@
  * and open the template in the editor.
  */
 import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -29,7 +30,7 @@ public class ClientConnessioneTCP {
     //porta del server in ascolto
     int port = 2501;
     DataOutputStream out;
-    BufferedReader in;
+    DataInputStream in;
     
     public ClientConnessioneTCP(int port){
     	this.port = port;   	
@@ -58,13 +59,13 @@ public class ClientConnessioneTCP {
 	    	try {
 	    		 //Definizione stream per la comunicazione
 	    		out = new DataOutputStream(connection.getOutputStream());
-			    in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			    in = new DataInputStream(connection.getInputStream());
 			    
 	    		//Invio messaggio
 				out.writeBytes(mess + "\n");
 				
 				//Ricezione risposta server
-				servermess = in.readLine();
+				servermess = in.readUTF();
 		        System.out.println("Risposta dal server: "+servermess);
 			} 
 	    	catch (IOException e) {
