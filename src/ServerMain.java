@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 public class ServerMain {
 	public static void main(String[] args) {
-		ServerConnessioneTCP server = new ServerConnessioneTCP(2502, 20000);
+		ServerConnessioneTCP server = new ServerConnessioneTCP(2506, 60000);
 		server.connect();
 		//server.talk();
 	}

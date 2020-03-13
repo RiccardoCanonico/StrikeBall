@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 public class ClientMain {
 	public static void main(String[] args) {
-		ClientConnessioneTCP client1 = new ClientConnessioneTCP(2502);
+		ClientConnessioneTCP client1 = new ClientConnessioneTCP(2506);
 		client1.connect();
 		client1.talk();		
 	}

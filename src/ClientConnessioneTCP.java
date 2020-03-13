@@ -21,16 +21,18 @@ public class ClientConnessioneTCP {
     /**
      * @param args the command line arguments
      */
-    static String mess = "ciao";
+    static String mess;
     static String servermess;
     //oggetto da usare per realizzare la connessione TCP
     Socket connection = null;
     //nome o IP del server
     String serverAddress = "localhost";
     //porta del server in ascolto
-    int port = 2501;
+    int port;
     DataOutputStream out;
     DataInputStream in;
+    BufferedReader tastiera;
+    boolean exit = true;
     
     public ClientConnessioneTCP(int port){
     	this.port = port;   	
@@ -56,22 +58,30 @@ public class ClientConnessioneTCP {
     }
     //Metodo per la comunicazione con server
     public void talk() {
-	    	try {
-	    		 //Definizione stream per la comunicazione
-	    		out = new DataOutputStream(connection.getOutputStream());
-			    in = new DataInputStream(connection.getInputStream());
-			    
-	    		//Invio messaggio
-				out.writeBytes(mess + "\n");
-				
-				//Ricezione risposta server
-				servermess = in.readUTF();
-		        System.out.println("Risposta dal server: "+servermess);
-			} 
-	    	catch (IOException e) {
+	    try{	
+	    	while(exit) {
+		    		//Definizione stream per la comunicazione
+		    		tastiera = new BufferedReader(new InputStreamReader(System.in));
+		    		out = new DataOutputStream(connection.getOutputStream());
+				    in = new DataInputStream(connection.getInputStream());
+				    
+		    		//Invio messaggio
+				    System.out.println("Inserisci il messaggio da mandare al server: \n");
+				    mess = tastiera.readLine();
+					out.writeUTF(mess + "\n");
+					
+					//Ricezione risposta server
+					servermess = in.readUTF();
+			        System.out.println("Risposta dal server: "+servermess);
+			        if(mess.equals("FINE")) {
+			        	exit = false;
+			        }
+				}
+		    }
+		    catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+		    }
 	    	finally {
 			    try {
 				      if (connection!=null)
@@ -83,7 +93,6 @@ public class ClientConnessioneTCP {
 			    catch(IOException e){
 			        System.err.println("Errore nella chiusura della connessione!");
 			    }
-	    	}    		
-		}
-    	
+	    	}	
+    	}  	
 }

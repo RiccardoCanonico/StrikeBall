@@ -39,23 +39,24 @@ public class ServerConnessioneTCP {
 	        try{
 	        	 // il server si mette in ascolto sulla porta voluta
 	            sSocket = new ServerSocket(port);
+	            System.out.println("In attesa di connessioni!");
 	        	while(connected) {
 		            Countdown c=new Countdown(timer);
-		            System.out.println("In attesa di connessioni!");
 		            // definizione timeout server
-		            sSocket.setSoTimeout(timer);
+		            //sSocket.setSoTimeout(timer);
 		            // avvio thread per timeout
-		            c.start();
+		            //c.start();
 		            connection = sSocket.accept();
-		            c.connected=true;
+		            //c.connected=true;
 		            // definizione thread per la comunicazione
 		            ServerThread sThread = new ServerThread(connection);
 		            System.out.println("Connessione stabilita!");
+		            // aggiungere il socket in un ArrayList per poter gestire i giocatori connessi al gioco
 		            System.out.println("Socket server: " + connection.getLocalSocketAddress());
 		            System.out.println("Socket client: " + connection.getRemoteSocketAddress());
 		            // avvio thread
 		            sThread.start();
-		            c.interrupt();
+		            //c.interrupt();
 	        	}	            
 	        }
 	        catch(IOException e){

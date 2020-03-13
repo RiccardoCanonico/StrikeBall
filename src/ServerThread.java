@@ -36,29 +36,28 @@ public class ServerThread extends Thread{
     		// definizione stream per la comunicazione
 			in = new DataInputStream(connection.getInputStream());
 			out = new DataOutputStream(connection.getOutputStream());
+			while(connected) {
+				// lettura richiesta server
+				richiesta = in.readUTF();
+				if(richiesta.equals("FINE")) {
+					connected = false;
+				}
+				else {
+					System.out.println("Richiesta client: "+richiesta);
+					// invio risposta al client
+		            out.writeUTF(risposta);
+				}
+			}
 		} 
     	catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		try {
-			// lettura richiesta server
-			richiesta = in.readUTF();
-            System.out.println("Richiesta client: "+richiesta);
-            
-            // invio risposta al client
-            out.writeBytes(risposta);
-              
-            out.close();
-            in.close();
-		} 
-		catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.err.println("Errore di I/O");
-		}
 		finally {
 			try {
 				if(connection != null) {
+					out.close();
+			        in.close();
 					connection.close();
 					System.out.println("Connessione chiusa!");
 				}

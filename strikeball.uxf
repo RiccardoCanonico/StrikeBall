@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>290</x>
+      <y>140</y>
+      <w>230</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>ClientConnessioneTCP
+--
+mess: String
+servermess: String
+connection: Socket
+serverAddres: String
+port: int
+out: DataOutputStream
+in: BufferedReader
+--
++ClientConnessioneTCP(int port)
++Connect(): Socket
++talk(): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>550</x>
+      <y>160</y>
+      <w>280</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>ServerConnessioneTCP
+--
+-port: int
+-timer: int
+sSocket: ServerSocket
+connection: Socket
+connected: boolean
+--
++ServerConnessioneTCP(int port; int timer)
++connect()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>890</x>
+      <y>160</y>
+      <w>230</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>ServerThread
+--
+connection: Socket
+in: BufferedReader
+out DataOutputStream
+risposta: String
+richiesta: String
+--
++ServerThread(Socket connection)
++run()
++talk()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>300</x>
+      <y>470</y>
+      <w>210</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>ClientMain
+--
+
+--
++static main(String[] args): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>560</x>
+      <y>470</y>
+      <w>210</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>ServerMain
+--
+
+--
++static main(String[] args): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>830</x>
+      <y>450</y>
+      <w>210</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>Countdown
+--
++connected: boolean
++timer: int
+--
++Countdown(int timer)
++run()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>600</x>
+      <y>310</y>
+      <w>50</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+use</panel_attributes>
+    <additional_attributes>10.0;160.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>390</x>
+      <y>350</y>
+      <w>50</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+use</panel_attributes>
+    <additional_attributes>10.0;120.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>800</x>
+      <y>310</y>
+      <w>110</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;90.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>820</x>
+      <y>220</y>
+      <w>90</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;70.0;10.0</additional_attributes>
+  </element>
+</diagram>
