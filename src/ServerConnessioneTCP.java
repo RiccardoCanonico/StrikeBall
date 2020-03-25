@@ -43,7 +43,7 @@ public class ServerConnessioneTCP {
 	        	while(connected) {
 		            Countdown c=new Countdown(timer);
 		            // definizione timeout server
-		            //sSocket.setSoTimeout(timer);
+		            sSocket.setSoTimeout(timer);
 		            // avvio thread per timeout
 		            //c.start();
 		            connection = sSocket.accept();
